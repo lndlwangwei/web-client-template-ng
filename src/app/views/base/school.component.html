@@ -41,38 +41,36 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>武淑慧</td>
-                <td>女</td>
-                <td>38</td>
-                <td>高中</td>
+              <tr *ngFor="let user of users">
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.secret}}</td>
+                <td>{{user.description}}</td>
               </tr>
-              <tr>
-                <td>老左</td>
-                <td>男</td>
-                <td>30</td>
-                <td>研究生</td>
-              </tr>
-              <tr>
-                <td>牛付巧</td>
-                <td>女</td>
-                <td>18</td>
-                <td>博士</td>
-              </tr>
+              <!--<tr>-->
+                <!--<td>武淑慧</td>-->
+                <!--<td>女</td>-->
+                <!--<td>38</td>-->
+                <!--<td>高中</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td>老左</td>-->
+                <!--<td>男</td>-->
+                <!--<td>30</td>-->
+                <!--<td>研究生</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td>牛付巧</td>-->
+                <!--<td>女</td>-->
+                <!--<td>18</td>-->
+                <!--<td>博士</td>-->
+              <!--</tr>-->
             </tbody>
           </table>
-          <nav>
-            <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-          </nav>
+          <div class="col-xs-12 col-12 d-sm-down-none float-right">
+            <pagination class="pull-right" [directionLinks]="true"  [boundaryLinks]="true" [rotate]="false" [maxSize]="6" [itemsPerPage]="10" [totalItems]="total"
+                        [(ngModel)]="page" [firstText]="'首页'" [lastText]="'末页'" [previousText]="'上一页'" [nextText]="'下一页'"></pagination>
+          </div>
         </div>
       </div>
     </div>
