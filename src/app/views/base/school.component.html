@@ -1,0 +1,151 @@
+<div class="animated fadeIn">
+  <!--/.row-->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group row">
+        <div class="input-group col-md-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">姓名</span>
+          </div>
+          <input type="text" id="username" name="username" class="form-control">
+        </div>
+        <div class="input-group col-md-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">性别</span>
+          </div>
+          <input type="text" id="gender" name="gender" class="form-control">
+        </div>
+        <div class="input-group col-md-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">学历</span>
+          </div>
+          <input type="text" id="stage" name="stage" class="form-control">
+        </div>
+        <button type="button" class="btn btn-sm btn-primary" (click)="printMsg()"><i class="fa fa-dot-circle-o"></i> 查询</button>
+        <div class="input-group float-right col-md-2">
+          <button type="button" class="btn btn-sm btn-success float-right" (click)="manageUser.show()"><i class="fa fa-dot-circle-o"></i> 新增</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> 学生列表
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>学历</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>武淑慧</td>
+                <td>女</td>
+                <td>38</td>
+                <td>高中</td>
+              </tr>
+              <tr>
+                <td>老左</td>
+                <td>男</td>
+                <td>30</td>
+                <td>研究生</td>
+              </tr>
+              <tr>
+                <td>牛付巧</td>
+                <td>女</td>
+                <td>18</td>
+                <td>博士</td>
+              </tr>
+            </tbody>
+          </table>
+          <nav>
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+              <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>
+
+<div bsModal #manageUser="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">学生信息</h4>
+        <button type="button" class="close" (click)="manageUser.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" for="modal-username">姓名</label>
+          <div class="col-md-10">
+            <input type="text" id="modal-username" name="modal-username" class="form-control" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" for="modal-gender">姓名</label>
+          <div class="col-md-10">
+            <input type="text" id="modal-gender" name="modal-username" class="form-control">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" for="modal-age">年龄</label>
+          <div class="col-md-10">
+            <input type="text" id="modal-age" name="modal-age" class="form-control">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" for="modal-college">学历</label>
+          <div class="col-md-10">
+            <input type="text" id="modal-college" name="modal-college" class="form-control">
+          </div>
+        </div>
+        <!--<div class="form-group row">-->
+          <!--<div class="input-group col-md-8">-->
+            <!--<div class="input-group-prepend">-->
+              <!--<span class="input-group-text">姓名</span>-->
+            <!--</div>-->
+            <!--<input type="text" id="modal-username" name="username" class="form-control">-->
+          <!--</div>-->
+          <!--<div class="input-group col-md-8">-->
+            <!--<div class="input-group-prepend">-->
+              <!--<span class="input-group-text">性别</span>-->
+            <!--</div>-->
+            <!--<input type="text" id="modal-gender" name="modal-gender" class="form-control">-->
+          <!--</div>-->
+          <!--<div class="input-group col-md-8">-->
+            <!--<div class="input-group-prepend">-->
+              <!--<span class="input-group-text">年龄</span>-->
+            <!--</div>-->
+            <!--<input type="text" id="modal-age" name="modal-age" class="form-control">-->
+          <!--</div>-->
+          <!--<div class="input-group col-md-8">-->
+            <!--<div class="input-group-prepend">-->
+              <!--<span class="input-group-text">学历</span>-->
+            <!--</div>-->
+            <!--<input type="text" id="modal-college" name="modal-college" class="form-control">-->
+          <!--</div>-->
+        <!--</div>-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="manageUser.hide()">取消</button>
+        <button type="button" class="btn btn-primary">保存</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
