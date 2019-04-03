@@ -8,11 +8,11 @@ import {User} from '../models/User';
 })
 export class UserServiceService {
 
-  private host = 'http://localhost:8083';
+  private host = 'http://localhost:8080';
 
   constructor(public httpClient: HttpClient) { }
 
   public getUsers(): Observable<User[]> {
-    return this.httpClient.get(`${this.host}/applications`);
+    return this.httpClient.get<User[]>(`${this.host}/users`);
   }
 }

@@ -34,18 +34,18 @@
           <table class="table table-bordered table-striped table-sm">
             <thead>
               <tr>
+                <th>编号</th>
                 <th>姓名</th>
+                <th>密码</th>
                 <th>性别</th>
-                <th>年龄</th>
-                <th>学历</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let user of users">
                 <td>{{user.id}}</td>
-                <td>{{user.name}}</td>
-                <td>{{user.secret}}</td>
-                <td>{{user.description}}</td>
+                <td>{{user.userName}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.gender}}</td>
               </tr>
               <!--<tr>-->
                 <!--<td>武淑慧</td>-->
@@ -90,27 +90,27 @@
       </div>
       <div class="modal-body">
         <div class="form-group row">
+          <label class="col-md-2 col-form-label" for="modal-id">编号</label>
+          <div class="col-md-10">
+            <input type="text" id="modal-id" name="modal-id" class="form-control" >
+          </div>
+        </div>
+        <div class="form-group row">
           <label class="col-md-2 col-form-label" for="modal-username">姓名</label>
           <div class="col-md-10">
             <input type="text" id="modal-username" name="modal-username" class="form-control" >
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-md-2 col-form-label" for="modal-gender">姓名</label>
+          <label class="col-md-2 col-form-label" for="modal-password">密码</label>
           <div class="col-md-10">
-            <input type="text" id="modal-gender" name="modal-username" class="form-control">
+            <input type="text" id="modal-password" name="modal-password" class="form-control">
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-md-2 col-form-label" for="modal-age">年龄</label>
+          <label class="col-md-2 col-form-label" for="modal-gender">性别</label>
           <div class="col-md-10">
-            <input type="text" id="modal-age" name="modal-age" class="form-control">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-2 col-form-label" for="modal-college">学历</label>
-          <div class="col-md-10">
-            <input type="text" id="modal-college" name="modal-college" class="form-control">
+            <input type="text" id="modal-gender" name="modal-gender" class="form-control">
           </div>
         </div>
         <!--<div class="form-group row">-->
