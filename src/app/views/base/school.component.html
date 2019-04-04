@@ -1,29 +1,36 @@
+<style>
+  button {
+    cursor: pointer;
+  }
+</style>
 <div class="animated fadeIn">
   <!--/.row-->
   <div class="row">
+    <h3 class="col-lg-12">学生信息管理</h3>
     <div class="col-lg-12">
       <div class="form-group row">
         <div class="input-group col-md-2">
           <div class="input-group-prepend">
+            <span class="input-group-text">编号</span>
+          </div>
+          <input type="text" id="id" [(ngModel)]="params.id" class="form-control">
+        </div>
+        <div class="input-group col-md-2">
+          <div class="input-group-prepend">
             <span class="input-group-text">姓名</span>
           </div>
-          <input type="text" id="username" name="username" class="form-control">
+          <input type="text" id="username" [(ngModel)]="params.userName" class="form-control">
         </div>
         <div class="input-group col-md-2">
           <div class="input-group-prepend">
             <span class="input-group-text">性别</span>
           </div>
-          <input type="text" id="gender" name="gender" class="form-control">
+          <input type="text" id="gender" [(ngModel)]="params.gender" class="form-control">
         </div>
-        <div class="input-group col-md-2">
-          <div class="input-group-prepend">
-            <span class="input-group-text">学历</span>
-          </div>
-          <input type="text" id="stage" name="stage" class="form-control">
-        </div>
-        <button type="button" class="btn btn-sm btn-primary" (click)="printMsg()"><i class="fa fa-dot-circle-o"></i> 查询</button>
+
+        <button type="button" class="btn btn-sm btn-primary" (click)="search()"><i class="fa fa-dot-circle-o"></i> 查询</button>
         <div class="input-group float-right col-md-2">
-          <button type="button" class="btn btn-sm btn-success float-right" (click)="manageUser.show()"><i class="fa fa-dot-circle-o"></i> 新增</button>
+          <button type="button" class="btn btn-sm btn-success float-right" (click)="openEditWindow(manageUser)"><i class="fa fa-dot-circle-o"></i> 新增</button>
         </div>
       </div>
       <div class="card">
@@ -34,42 +41,33 @@
           <table class="table table-bordered table-striped table-sm">
             <thead>
               <tr>
+                <th>编号</th>
                 <th>姓名</th>
+                <th>密码</th>
                 <th>性别</th>
-                <th>年龄</th>
-                <th>学历</th>
+                <th>创建时间</th>
+                <th>更新时间</th>
+                <th>操作</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let user of users">
                 <td>{{user.id}}</td>
-                <td>{{user.name}}</td>
-                <td>{{user.secret}}</td>
-                <td>{{user.description}}</td>
+                <td>{{user.userName}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.gender}}</td>
+                <td>{{user.createTime}}</td>
+                <td>{{user.updateTime}}</td>
+                <td>
+                  <button class="button btn-sm btn-primary" (click)="openEditWindow(manageUser, user)" style="margin-right: 5px;">修改</button>
+                  <button class="button btn-sm btn-danger" (click)="delete(user)">删除</button>
+                </td>
               </tr>
-              <!--<tr>-->
-                <!--<td>武淑慧</td>-->
-                <!--<td>女</td>-->
-                <!--<td>38</td>-->
-                <!--<td>高中</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                <!--<td>老左</td>-->
-                <!--<td>男</td>-->
-                <!--<td>30</td>-->
-                <!--<td>研究生</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                <!--<td>牛付巧</td>-->
-                <!--<td>女</td>-->
-                <!--<td>18</td>-->
-                <!--<td>博士</td>-->
-              <!--</tr>-->
             </tbody>
           </table>
           <div class="col-xs-12 col-12 d-sm-down-none float-right">
-            <pagination class="pull-right" [directionLinks]="true"  [boundaryLinks]="true" [rotate]="false" [maxSize]="6" [itemsPerPage]="10" [totalItems]="total"
-                        [(ngModel)]="page" [firstText]="'首页'" [lastText]="'末页'" [previousText]="'上一页'" [nextText]="'下一页'"></pagination>
+            <pagination class="pull-right" [directionLinks]="true"  [boundaryLinks]="true" [rotate]="false" [maxSize]="6" [itemsPerPage]="params.pageSize" [totalItems]="params.totalSize"
+                        [(ngModel)]="params.currentPage" [firstText]="'首页'" [lastText]="'末页'" [previousText]="'上一页'" [nextText]="'下一页'" (pageChanged)="search($event)"></pagination>
           </div>
         </div>
       </div>
@@ -84,65 +82,39 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">学生信息</h4>
-        <button type="button" class="close" (click)="manageUser.hide()" aria-label="Close">
+        <button type="button" class="close" (click)="closeEditWindow(manageUser)" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+        <div class="form-group row" *ngIf="currentUser.id">
+          <label class="col-md-2 col-form-label" for="modal-username">编号</label>
+          <div class="col-md-10">
+            <input type="text" id="modal-id" name="modal-id" disabled="true" [(ngModel)]="currentUser.id" class="form-control" >
+          </div>
+        </div>
         <div class="form-group row">
           <label class="col-md-2 col-form-label" for="modal-username">姓名</label>
           <div class="col-md-10">
-            <input type="text" id="modal-username" name="modal-username" class="form-control" >
+            <input type="text" id="modal-username" name="modal-username" [(ngModel)]="currentUser.userName" class="form-control">
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-md-2 col-form-label" for="modal-gender">姓名</label>
+          <label class="col-md-2 col-form-label" for="modal-password">密码</label>
           <div class="col-md-10">
-            <input type="text" id="modal-gender" name="modal-username" class="form-control">
+            <input type="text" id="modal-password" name="modal-password" [(ngModel)]="currentUser.password" class="form-control">
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-md-2 col-form-label" for="modal-age">年龄</label>
+          <label class="col-md-2 col-form-label" for="modal-gender">性别</label>
           <div class="col-md-10">
-            <input type="text" id="modal-age" name="modal-age" class="form-control">
+            <input type="text" id="modal-gender" name="modal-gender" [(ngModel)]="currentUser.gender" class="form-control">
           </div>
         </div>
-        <div class="form-group row">
-          <label class="col-md-2 col-form-label" for="modal-college">学历</label>
-          <div class="col-md-10">
-            <input type="text" id="modal-college" name="modal-college" class="form-control">
-          </div>
-        </div>
-        <!--<div class="form-group row">-->
-          <!--<div class="input-group col-md-8">-->
-            <!--<div class="input-group-prepend">-->
-              <!--<span class="input-group-text">姓名</span>-->
-            <!--</div>-->
-            <!--<input type="text" id="modal-username" name="username" class="form-control">-->
-          <!--</div>-->
-          <!--<div class="input-group col-md-8">-->
-            <!--<div class="input-group-prepend">-->
-              <!--<span class="input-group-text">性别</span>-->
-            <!--</div>-->
-            <!--<input type="text" id="modal-gender" name="modal-gender" class="form-control">-->
-          <!--</div>-->
-          <!--<div class="input-group col-md-8">-->
-            <!--<div class="input-group-prepend">-->
-              <!--<span class="input-group-text">年龄</span>-->
-            <!--</div>-->
-            <!--<input type="text" id="modal-age" name="modal-age" class="form-control">-->
-          <!--</div>-->
-          <!--<div class="input-group col-md-8">-->
-            <!--<div class="input-group-prepend">-->
-              <!--<span class="input-group-text">学历</span>-->
-            <!--</div>-->
-            <!--<input type="text" id="modal-college" name="modal-college" class="form-control">-->
-          <!--</div>-->
-        <!--</div>-->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="manageUser.hide()">取消</button>
-        <button type="button" class="btn btn-primary">保存</button>
+        <button type="button" class="btn btn-secondary" (click)="closeEditWindow(manageUser)">取消</button>
+        <button type="button" class="btn btn-primary" (click)="save()">保存</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
