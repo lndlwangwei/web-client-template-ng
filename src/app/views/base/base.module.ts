@@ -48,8 +48,8 @@ import { BaseRoutingModule } from './base-routing.module';
 import {SchoolComponent} from './school.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {ModalsComponent} from '../notifications/modals.component';
-import {UserServiceService} from '../../services/user-service.service';
 import {HttpClientModule} from '@angular/common/http';
+import {UserService} from '../../services/user.service';
 
 @NgModule({
   imports: [
@@ -81,7 +81,7 @@ import {HttpClientModule} from '@angular/common/http';
     TooltipsComponent
   ],
   providers: [
-    UserServiceService
+    UserService
   ]
 })
 export class BaseModule { }

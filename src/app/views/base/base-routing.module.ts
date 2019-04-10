@@ -23,7 +23,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'cards'
+        redirectTo: 'schools'
       },
       {
         path: 'cards',
