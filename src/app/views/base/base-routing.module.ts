@@ -13,6 +13,7 @@ import {PopoversComponent} from './popovers.component';
 import {ProgressComponent} from './progress.component';
 import {TooltipsComponent} from './tooltips.component';
 import {SchoolComponent} from './school.component';
+import {ClassComponent} from './class.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,13 @@ const routes: Routes = [
         component: SchoolComponent,
         data: {
           title: 'School'
+        }
+      },
+      {
+        path: 'class',
+        component: ClassComponent,
+        data: {
+          title: 'class'
         }
       },
       {

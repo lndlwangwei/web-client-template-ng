@@ -50,6 +50,7 @@ import {ModalModule} from 'ngx-bootstrap/modal';
 import {ModalsComponent} from '../notifications/modals.component';
 import {HttpClientModule} from '@angular/common/http';
 import {UserService} from '../../services/user.service';
+import {ClassComponent} from './class.component';
 
 @NgModule({
   imports: [
@@ -78,7 +79,8 @@ import {UserService} from '../../services/user.service';
     PaginationsComponent,
     PopoversComponent,
     ProgressComponent,
-    TooltipsComponent
+    TooltipsComponent,
+    ClassComponent
   ],
   providers: [
     UserService
