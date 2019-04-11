@@ -2,11 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/User';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ClassComponent} from './class.component';
 
 @Component({
-  templateUrl: 'school.component.html'
+  templateUrl: 'user.component.html'
 })
-export class SchoolComponent implements OnInit {
+export class UserComponent implements OnInit {
 
   public manageUser;
   public users: User[] = [];
@@ -14,7 +16,8 @@ export class SchoolComponent implements OnInit {
   public maxSize = 5;
   public currentUser: User = new User();
 
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService,
+              public modalService: NgbModal) {
 
   }
 
@@ -37,12 +40,13 @@ export class SchoolComponent implements OnInit {
   }
 
   public openEditWindow(window, user) {
-    this.manageUser = window;
-    if (user) {
-      this.currentUser = user;
-    }
-
-    window.show();
+    this.modalService.open(ClassComponent);
+    // this.manageUser = window;
+    // if (user) {
+    //   this.currentUser = user;
+    // }
+    //
+    // window.show();
   }
 
   public closeEditWindow() {

@@ -45,12 +45,13 @@ import { TooltipsComponent } from './tooltips.component';
 
 // Components Routing
 import { BaseRoutingModule } from './base-routing.module';
-import {SchoolComponent} from './school.component';
+import {UserComponent} from './user.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {ModalsComponent} from '../notifications/modals.component';
 import {HttpClientModule} from '@angular/common/http';
 import {UserService} from '../../services/user.service';
 import {ClassComponent} from './class.component';
+import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -65,14 +66,15 @@ import {ClassComponent} from './class.component';
     PopoverModule.forRoot(),
     ProgressbarModule.forRoot(),
     TooltipModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgbModalModule
   ],
   declarations: [
     CardsComponent,
     FormsComponent,
     SwitchesComponent,
     TablesComponent,
-    SchoolComponent,
+    UserComponent,
     TabsComponent,
     CarouselsComponent,
     CollapsesComponent,

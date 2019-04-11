@@ -12,7 +12,7 @@ import { PaginationsComponent } from './paginations.component';
 import {PopoversComponent} from './popovers.component';
 import {ProgressComponent} from './progress.component';
 import {TooltipsComponent} from './tooltips.component';
-import {SchoolComponent} from './school.component';
+import {UserComponent} from './user.component';
 import {ClassComponent} from './class.component';
 
 const routes: Routes = [
@@ -56,7 +56,7 @@ const routes: Routes = [
       },
       {
         path: 'schools',
-        component: SchoolComponent,
+        component: UserComponent,
         data: {
           title: 'School'
         }
