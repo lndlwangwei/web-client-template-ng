@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../services/user.service';
-import {User} from '../../models/User';
+import {UserService} from '../../../services/user.service';
+import {User} from '../../../models/User';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ClassComponent} from './class.component';
+import {ClassComponent} from '../class/class.component';
+import {UserEditComponent} from './modal/user-edit.component';
 
 @Component({
   templateUrl: 'user.component.html'
@@ -40,7 +41,7 @@ export class UserComponent implements OnInit {
   }
 
   public openEditWindow(window, user) {
-    this.modalService.open(ClassComponent);
+    this.modalService.open(UserEditComponent, {size: 'lg'});
     // this.manageUser = window;
     // if (user) {
     //   this.currentUser = user;

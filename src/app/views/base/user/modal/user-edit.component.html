@@ -1,0 +1,45 @@
+<!--<div class="row">-->
+  <!--<div class="modal-dialog" role="document">-->
+    <!--<div class="modal-content">-->
+<form>
+  <div class="modal-header">
+    <h4 class="modal-title">学生信息</h4>
+    <button type="button" class="close" (click)="closeEditWindow(manageUser)" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group row" *ngIf="currentUser.id">
+      <label class="col-md-2 col-form-label" for="modal-username">编号</label>
+      <div class="col-md-10">
+        <input type="text" id="modal-id" name="modal-id" disabled="true" [(ngModel)]="currentUser.id" class="form-control" >
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="modal-username">姓名</label>
+      <div class="col-md-10">
+        <input type="text" id="modal-username" name="modal-username" [(ngModel)]="currentUser.userName" class="form-control">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="modal-password">密码</label>
+      <div class="col-md-10">
+        <input type="text" id="modal-password" name="modal-password" [(ngModel)]="currentUser.password" class="form-control">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="modal-gender">性别</label>
+      <div class="col-md-10">
+        <input type="text" id="modal-gender" name="modal-gender" [(ngModel)]="currentUser.gender" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="actionModal.dismiss()">取消</button>
+    <button type="button" class="btn btn-primary" (click)="save()">保存</button>
+  </div>
+</form>
+
+    <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+  <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>-->
