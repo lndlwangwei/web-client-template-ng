@@ -14,6 +14,7 @@ import {ProgressComponent} from './progress.component';
 import {TooltipsComponent} from './tooltips.component';
 import {UserComponent} from './user/user.component';
 import {ClassComponent} from './class/class.component';
+import {TextSegmentationComponent} from './text-segmentation/text-segmentation.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'schools'
+        redirectTo: 'text-segmentation'
       },
       {
         path: 'cards',
@@ -66,6 +67,13 @@ const routes: Routes = [
         component: ClassComponent,
         data: {
           title: 'class'
+        }
+      },
+      {
+        path: 'text-segmentation',
+        component: TextSegmentationComponent,
+        data: {
+          title: 'text-segmentation'
         }
       },
       {

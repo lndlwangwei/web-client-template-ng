@@ -1,0 +1,207 @@
+<style>
+  .my-drop-zone { border: dotted 3px lightgray; }
+  .nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+  .another-file-over-class { border: dotted 3px green; }
+  html, body { height: 100%; }
+</style>
+
+<div>
+
+  <div class="row navbar navbar-default">
+    <div class="navbar-header">
+      <!--<a class="navbar-brand" href>试卷文本自动分段</a>-->
+      <h3>试卷文本自动分段</h3>
+      <!--<div class="form-group">-->
+        <select class="form-control" [(ngModel)]="courseId" (change)="courseIdChange()">
+          <option value="26">高中语文</option>
+          <option value="27">高中数学</option>
+          <option value="28">高中英语</option>
+          <option value="29">高中物理</option>
+          <option value="30">高中化学</option>
+          <option value="31">高中生物</option>
+          <option value="32">高中政治</option>
+          <option value="33">高中历史</option>
+          <option value="34">高中地理</option>
+          <option value="10">初中语文</option>
+          <option value="11">初中数学</option>
+          <option value="12">初中英语</option>
+          <option value="13">初中物理</option>
+          <option value="14">初中化学</option>
+          <option value="15">初中生物</option>
+          <option value="16">初中道德与法制</option>
+          <option value="17">初中历史</option>
+          <option value="18">初中地理</option>
+          <option value="19">初中科学</option>
+
+          <option value="101">作业</option>
+        </select>
+      <!--</div>-->
+    </div>
+  </div>
+  <hr/>
+
+  <div class="row" style="margin-top: 10px">
+
+    <div class="col-md-3">
+      <h5>上传文件</h5>
+
+      <div ng2FileDrop style="height: 100px"
+           [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+           (fileOver)="fileOverBase($event)"
+           [uploader]="uploader"
+           class="well my-drop-zone">
+        请拖入试卷文件，仅支持docx
+      </div>
+
+      <div style="margin-top: 10px">
+        上传多个文件
+        <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
+      </div>
+      <!--<div>-->
+        <!--上传试卷-->
+        <!--<input type="file" ng2FileSelect [uploader]="uploader" style="margin-top: 10px"/>-->
+      <!--</div>-->
+
+    </div>
+
+    <div class="col-md-9" style="margin-bottom: 40px;max-height: 500px; overflow: auto">
+
+      <h5>上传列表</h5>
+      <!--<p>Queue length: {{ uploader?.queue?.length }}</p>-->
+
+      <table class="table" style="">
+        <thead>
+        <tr>
+          <th width="70%">Name</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of uploader.queue">
+          <td><strong>{{ item?.file?.name }}</strong></td>
+          <!--<td *ngIf="uploader.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>-->
+          <!--<td *ngIf="uploader.isHTML5">-->
+            <!--<div class="progress" style="margin-bottom: 0;">-->
+              <!--<div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>-->
+            <!--</div>-->
+          <!--</td>-->
+          <!--<td class="text-center">-->
+            <!--<span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>-->
+            <!--<span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>-->
+            <!--<span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>-->
+          <!--</td>-->
+          <td nowrap>
+            <button type="button" class="btn btn-success btn-xs" (click)="getParagraph(item)">
+              <span class="glyphicon glyphicon-upload"></span> 段落
+            </button>
+            <button type="button" class="btn btn-success btn-xs" (click)="getFragment(item)">
+              <span class="glyphicon glyphicon-upload"></span> 结构
+            </button>
+            <button type="button" class="btn btn-success btn-xs" (click)="getStruct(item)">
+              <span class="glyphicon glyphicon-upload"></span> 分片
+            </button>
+            <!--<button type="button" class="btn btn-warning btn-xs"-->
+                    <!--(click)="item.cancel()" [disabled]="!item.isUploading">-->
+              <!--<span class="glyphicon glyphicon-ban-circle"></span> Cancel-->
+            <!--</button>-->
+            <button type="button" class="btn btn-danger btn-xs"
+                    (click)="item.remove()">
+              <span class="glyphicon glyphicon-trash"></span> Remove
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <!--<div>-->
+        <!--<div>-->
+          <!--Queue progress:-->
+          <!--<div class="progress" style="">-->
+            <!--<div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<button type="button" class="btn btn-success btn-s"-->
+                <!--(click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">-->
+          <!--<span class="glyphicon glyphicon-upload"></span> Upload all-->
+        <!--</button>-->
+        <!--<button type="button" class="btn btn-warning btn-s"-->
+                <!--(click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">-->
+          <!--<span class="glyphicon glyphicon-ban-circle"></span> Cancel all-->
+        <!--</button>-->
+        <!--<button type="button" class="btn btn-danger btn-s"-->
+                <!--(click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">-->
+          <!--<span class="glyphicon glyphicon-trash"></span> Remove all-->
+        <!--</button>-->
+      <!--</div>-->
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="col-lg-12" style="margin-top: 10px;" *ngIf="(type == 'paragraph' || type == 'struct') && paragraphs.length > 0">
+  <div class="card">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i> 处理结果(段落)
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+        <tr>
+          <th width="10%">类型</th>
+          <th>段落</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let paragraph of paragraphs">
+          <td>
+            <span class="badge" [ngClass]="{
+              'badge-success': paragraph.partType == 'PAPER_TITLE',
+              'badge-dark': paragraph.partType == 'PAPER_FRAGMENT',
+              'badge-info': paragraph.partType == 'QUESTION_START_LEVEL1',
+              'badge-danger': paragraph.partType == 'COMPLEX_QUESTION_START',
+              'badge-warning': paragraph.partType == 'QUESTION',
+              'badge-secondary': paragraph.partType == 'ANSWER'
+            }">
+            {{paragraph.partType}}
+            </span>
+          </td>
+          <td>{{paragraph.text}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="col-lg-12" style="margin-top: 10px;" *ngIf="type == 'fragment' && fragments.length > 0">
+  <div class="card">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i> 处理结果
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+        <tr>
+          <th width="10%">类型</th>
+          <th>文本</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let fragment of fragments">
+          <td>
+            <span class="badge" [ngClass]="{
+              'badge-success': fragment.type == 'QUESTION',
+              'badge-dark': fragment.type == 'PAPER_FRAGMENT',
+              'badge-info': fragment.type == 'QUESTION_START_LEVEL1'
+            }">
+            {{fragment.type == 'PAPER_FRAGMENT' ? fragment.type : fragment.questionType}}
+            </span>
+          </td>
+          <td [innerHtml]="fragment.html | trustHtml"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

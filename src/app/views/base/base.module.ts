@@ -53,6 +53,10 @@ import {UserService} from '../../services/user.service';
 import {ClassComponent} from './class/class.component';
 import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import { UserEditComponent } from './user/modal/user-edit.component';
+import { TextSegmentationComponent } from './text-segmentation/text-segmentation.component';
+import {FileUploadModule} from 'ng2-file-upload';
+import {TrustHtmlPipe} from '../pipes/trust-html.pipe';
+import {SharedPipesModule} from '../pipes/shared-pipes.module';
 
 @NgModule({
   imports: [
@@ -69,6 +73,8 @@ import { UserEditComponent } from './user/modal/user-edit.component';
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     NgbModalModule,
+    FileUploadModule,
+    SharedPipesModule
   ],
   declarations: [
     CardsComponent,
@@ -84,7 +90,8 @@ import { UserEditComponent } from './user/modal/user-edit.component';
     TooltipsComponent,
     ClassComponent,
     UserComponent,
-    UserEditComponent
+    UserEditComponent,
+    TextSegmentationComponent
   ],
   providers: [
     UserService
