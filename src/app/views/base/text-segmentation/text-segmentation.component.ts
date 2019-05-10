@@ -10,8 +10,11 @@ export class TextSegmentationComponent {
   public courseId = 26;
 
   private uploader: FileUploader = new FileUploader({
-    url: `http://10.1.23.147:8890/text/segmentation/cut`,
-    additionalParameter: {courseId: this.getCourseId()},
+    url: `http://localhost:8889/text/segmentation/cut`,
+    additionalParameter: {
+      courseId: this.getCourseId(),
+      format: 'text'
+    },
   });
 
   isCollapsed = false;
