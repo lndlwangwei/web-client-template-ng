@@ -10,7 +10,7 @@ export class TextSegmentationComponent {
   public courseId = 26;
 
   private uploader: FileUploader = new FileUploader({
-    url: `http://localhost:8889/text/segmentation/cut`,
+    url: `http://10.1.23.147:8889/text/segmentation/cut`,
     additionalParameter: {
       courseId: this.getCourseId(),
       format: 'text'
@@ -22,6 +22,7 @@ export class TextSegmentationComponent {
   type = 'paragraph';
   paragraphs: any = [];
   fragments: any = [];
+  questionCount = 0;
 
   public hasBaseDropZoneOver = true;
   public hasAnotherDropZoneOver = true;
@@ -56,6 +57,8 @@ export class TextSegmentationComponent {
         this.paragraphs = JSON.parse(response);
       } else {
         this.fragments = JSON.parse(response);
+        this.questionCount = this.fragments.filter(f => f.type && f.type === 'QUESTION').length;
+
         for (let i = 0; i < this.fragments.length; i++) {
           const f = this.fragments[i];
           if (f.questionType && f.questionType === 'COMPLEX' && f.subQuestions && f.subQuestions.length > 0) {
@@ -89,6 +92,7 @@ export class TextSegmentationComponent {
   getFragment(item: FileItem): void {
     this.type = 'fragment';
     this.fragments = [];
+    this.questionCount = 0;
     this.uploader.options.additionalParameter.type = 'fragment';
     item.upload();
   }
